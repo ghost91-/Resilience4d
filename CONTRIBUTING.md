@@ -1,7 +1,7 @@
 # Contributing to Resilience4d
-First off, thank you for your interest in contributing to fsical-management—we need all the help we can get! 
+First off, thank you for your interest in contributing to Resilience4d—we need all the help we can get! 
 
-The following is a set of guidelines for contributing to Resilience4d. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
+The following is a set of guidelines for contributing to Resilience4d. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a merge request.
 
 ## Important resources
 - Documentation: [README.md](README.md) (we don’t have anything else at the moment)
@@ -66,13 +66,13 @@ Enhancement Suggestion are tracked in our [issue tracker](https://gitlab.com/gho
 ### Your first contribution
 
 If you are unsure where to start, you can look through issues tagged with `beginner` and `help wanted`:
-- [Beginner issues](https://gitlab.com/ghost91-/resilience4d/issues?label_name%5B%5D=beginner) - issues which should only require a few lines of code, and a test or two.
+- [Beginner issues](https://gitlab.com/ghost91-/resilience4d/issues?label_name%5B%5D=beginner) - issues which should only require a few lines of code and a test or two.
 - [Help wanted issues](https://gitlab.com/ghost91-/resilience4d/issues?label_name%5B%5D=help+wanted) - issues which should be a bit more involved than `beginner` issues.
 
-### Pull requests
+### Merge requests
 
 #### Branching model
-We are using [gitflow](http://nvie.com/posts/a-successful-git-branching-model/) as our branching model. Additionally we require that all merges be done as pull requests and we also have a naming scheme for our feature branches:
+We are using [gitflow](http://nvie.com/posts/a-successful-git-branching-model/) as our branching model. Additionally we require that all merges be done as merge requests and we also have a naming scheme for our feature branches:
 ```
 <scope>-<issue_number>_short-description
 ```
@@ -82,12 +82,12 @@ Scope can be one of the following:
 - `technical` - changes of the code that do not modify features (e.g. refactoring, adding tests, updating dependencies etc.)
 - `chore` - everything that does not touch the actual code (modifying README files, renaming files etc.)
 
-#### Submitting pull requests
-When creating a pull request, please provide the following information by filling in the [template](.github/pull_request_template.md).
+#### Submitting merge requests
+When creating a merge request, please provide the following information by filling in the [template](.gitlab/merge_request_templates/Merge%20request.md).
 
-- What issue does this pull request correspond to?
-- What does this pull request implement?
-- What changes are made in this pull request?
+- What issue does this merge request correspond to?
+- What does this merge request implement?
+- What changes are made in this merge request?
 
 ## Styleguides
 
@@ -111,7 +111,7 @@ For the actual text in the commit message, here are some additional guidelines:
 - Use the present tense ("add feature" not "added feature").
 - Use the imperative mood ("move cursor to…" not "moves cursor to…").
 - Limit the first line to 72 characters or less.
-- Reference issues and pull requests liberally after the first line.
+- Reference issues and merge requests liberally after the first line.
 
 ### D styleguide
 All D code must adhere to [The D Style](https://dlang.org/dstyle.html). We suggest using [dfmt](https://github.com/dlang-community/dfmt) to format the code accordingly.
