@@ -1,0 +1,8 @@
+name "resilience4d"
+description "A fault tolerance library for D inspired by Resilience4j."
+authors "Johannes Loher"
+copyright "Copyright © 2018, Johannes Loher"
+license "MIT"
+targetType "none"
+dependency "resilience4d:circuit-breaker" version="*"
+subPackage "circuit-breaker"

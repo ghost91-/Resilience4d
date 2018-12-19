@@ -1,0 +1,16 @@
+.dub
+dub.selections.json
+docs.json
+__dummy.html
+docs/
+resilience4d.so
+resilience4d.dylib
+resilience4d.dll
+resilience4d.a
+resilience4d.lib
+libresilience4d*
+resilience4d-*
+*.exe
+*.o
+*.obj
+*.lst

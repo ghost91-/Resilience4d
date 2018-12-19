@@ -1,0 +1,11 @@
+name "circuit-breaker"
+
+configuration "library" {
+    targetType "library"
+    excludedSourceFiles "*_test.d"
+}
+
+configuration "unittest" {
+    targetType "library"
+    dependency "fluent-asserts" version="~>0.12.3"
+}

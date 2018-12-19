@@ -1,0 +1,9 @@
+image: dlang2/dmd-ubuntu:2.083.1
+
+stages:
+  - test
+
+test circuit-breaker:
+  script:
+    - dub test :circuit-breaker
+  stage: test

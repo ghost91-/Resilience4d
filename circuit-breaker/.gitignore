@@ -1,0 +1,6 @@
+circuit-breaker.so
+circuit-breaker.dylib
+circuit-breaker.dll
+circuit-breaker.a
+circuit-breaker.lib
+circuit-breaker-test-*
