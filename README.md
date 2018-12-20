@@ -55,7 +55,6 @@ This project is licensed under the MIT License, see the [LICENSE.md](LICENSE.md)
 
 ### Resilience4j
 Resilience4d is heavily inspired by [Resilience4j](https://github.com/resilience4j/resilience4j/), which is licensed under the Apache License, Version 2.0. You may obtain a copy of that license at
-```
-http://www.apache.org/licenses/LICENSE-2.0
-```
+http://www.apache.org/licenses/LICENSE-2.0.
+
 Thanks a lot to everybody involved with that project.
