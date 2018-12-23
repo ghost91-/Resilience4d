@@ -1,8 +1,8 @@
-module resilience4d.circuit_breaker.ring_bit_set_test;
+module resilience4d.circuit_breaker.internal.ring_bit_set_test;
 
-import resilience4d.circuit_breaker.ring_bit_set;
+import resilience4d.circuit_breaker.internal.ring_bit_set;
 
-version (unittest)
+version (RESILIENCE4D_UNITTEST)
 {
     import fluent.asserts;
 }
