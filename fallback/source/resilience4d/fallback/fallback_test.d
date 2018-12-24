@@ -4,9 +4,10 @@ import resilience4d.fallback;
 
 version (RESILIENCE4D_UNITTEST)
 {
-    import fluent.asserts;
+    import unit_threaded;
 }
 
+@("attempt with free function")
 unittest
 {
     // given
@@ -18,52 +19,56 @@ unittest
     alias underTest = attempt!foo;
 
     // when
-    auto result = underTest();
+    immutable result = underTest();
 
     // then
-    result.hasValue.should.equal(true);
-    result.value.should.equal(0);
+    result.hasValue.should.be == true;
+    result.value.should.be == 0;
 }
 
+@("attempt with lambda")
 unittest
 {
     // given
     alias underTest = attempt!(() => 0);
 
     // when
-    auto result = underTest();
+    immutable result = underTest();
 
     // then
-    result.hasValue.should.equal(true);
-    result.value.should.equal(0);
+    result.hasValue.should.be == true;
+    result.value.should.be == 0;
 }
 
+@("attempt with lambda with parameter")
 unittest
 {
     // given
     alias underTest = attempt!(x => x);
 
     // when
-    auto result = underTest(42);
+    immutable result = underTest(42);
 
     // then
-    result.hasValue.should.equal(true);
-    result.value.should.equal(42);
+    result.hasValue.should.be == true;
+    result.value.should.be == 42;
 }
 
+@("failed attempt")
 unittest
 {
     // given
     alias underTest = attempt!(function int() { throw new Exception("foo"); });
 
     // when
-    auto result = underTest();
+    immutable result = underTest();
 
     // then
-    result.hasValue.should.equal(false);
-    result.exception.msg.should.equal("foo");
+    result.hasValue.should.be == false;
+    result.exception.msg.should.be == "foo";
 }
 
+@("attempt with closure")
 unittest
 {
     // given
@@ -71,13 +76,14 @@ unittest
     alias underTest = attempt!(() => x);
 
     // when
-    auto result = underTest();
+    immutable result = underTest();
 
     // then
-    result.hasValue.should.equal(true);
-    result.value.should.equal(42);
+    result.hasValue.should.be == true;
+    result.value.should.be == 42;
 }
 
+@("attempt with closure referencing a member function")
 unittest
 {
     // given
@@ -93,13 +99,14 @@ unittest
     alias underTest = attempt!(() => someStruct.foo());
 
     // when
-    auto result = underTest();
+    immutable result = underTest();
 
     // then
-    result.hasValue.should.equal(true);
-    result.value.should.equal(0);
+    result.hasValue.should.be == true;
+    result.value.should.be == 0;
 }
 
+@("attempt with static member function")
 unittest
 {
     // given
@@ -114,9 +121,9 @@ unittest
     alias underTest = attempt!(SomeStruct.foo);
 
     // when
-    auto result = underTest();
+    immutable result = underTest();
 
     // then
-    result.hasValue.should.equal(true);
-    result.value.should.equal(0);
+    result.hasValue.should.be == true;
+    result.value.should.be == 0;
 }

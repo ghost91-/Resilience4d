@@ -9,6 +9,9 @@ configuration "library" {
 
 configuration "unittest" {
     versions "RESILIENCE4D_UNITTEST"
-    targetType "library"
-    dependency "fluent-asserts" version="~>0.12.3"
+    targetType "executable"
+    targetName "fallback-test-unittest"
+    dependency "unit-threaded" version="~>0.7.53"
+    preBuildCommands "dub run unit-threaded -c gen_ut_main -- -f bin/ut.d"
+    mainSourceFile "bin/ut.d"
 }

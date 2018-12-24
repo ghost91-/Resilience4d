@@ -4,7 +4,7 @@ public import expectations;
 
 version (RESILIENCE4D_UNITTEST)
 {
-    import fluent.asserts;
+    import unit_threaded;
 }
 
 template attempt(alias func)
@@ -33,13 +33,13 @@ unittest
     });
 
     // when
-    auto succesfulResult = attemptDivide(10, 2);
-    auto failedResult = attemptDivide(1, 0);
+    immutable succesfulResult = attemptDivide(10, 2);
+    immutable failedResult = attemptDivide(1, 0);
 
     // then
-    succesfulResult.hasValue.should.equal(true);
-    succesfulResult.value.should.equal(5);
-    failedResult.hasValue.should.equal(false);
-    failedResult.exception.msg.should.equal("Division by zero");
+    succesfulResult.hasValue.should.be == true;
+    succesfulResult.value.should.be == 5;
+    failedResult.hasValue.should.be == false;
+    failedResult.exception.msg.should.be == "Division by zero";
 
 }
