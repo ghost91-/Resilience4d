@@ -1,0 +1,14 @@
+name "fallback"
+
+dependency "expectations" version="~>0.2.0"
+
+configuration "library" {
+    targetType "library"
+    excludedSourceFiles "*_test.d"
+}
+
+configuration "unittest" {
+    versions "RESILIENCE4D_UNITTEST"
+    targetType "library"
+    dependency "fluent-asserts" version="~>0.12.3"
+}
