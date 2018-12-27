@@ -12,6 +12,6 @@ configuration "unittest" {
     targetType "executable"
     targetName "fallback-test-unittest"
     dependency "unit-threaded" version="~>0.7.53"
-    preBuildCommands "dub run unit-threaded -c gen_ut_main -- -f bin/ut.d"
+    preBuildCommands "cd $PACKAGE_DIR; dub run unit-threaded -c gen_ut_main -- -f bin/ut.d"
     mainSourceFile "bin/ut.d"
 }
