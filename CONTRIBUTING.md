@@ -4,7 +4,7 @@ all the help we can get!
 
 The following is a set of guidelines for contributing to Resilience4d. These are
 mostly guidelines, not rules. Use your best judgment, and feel free to propose
-changes to this document in a merge request.
+changes to this document in a pull request.
 
 ## Important resources
 - Documentation: [README.md](README.md) (we don’t have anything else at the
@@ -92,18 +92,15 @@ information by filling in the [template](https://github.com/ghost91-/Resilience4
 
 ### Your first contribution
 
-If you are unsure where to start, you can look through issues tagged with
-`beginner` and `help wanted`:
-- [Beginner issues](https://gitlab.com/ghost91-/resilience4d/issues?label_name%5B%5D=beginner):
-  issues which should only require a few lines of code and a test or two.
-- [Help wanted issues](https://gitlab.com/ghost91-/resilience4d/issues?label_name%5B%5D=help+wanted):
-  issues which should be a bit more involved than `beginner` issues.
+If you are unsure where to start, you can look through issues labeled with
+[beginner](https://github.com/ghost91-/Resilience4d/labels/beginner). These
+are issues which should only require a few lines of code and a test or two.
 
-### Merge requests
+### Pull requests
 
 #### Branching model
 We are using [OneFlow](https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow)
-as our branching model. Additionally we require that all merges be done as merge
+as our branching model. Additionally we require that all merges be done as pull
 requests and we also have a naming scheme for our feature branches:
 ```
 <scope>-<issue_number>_short-description
@@ -118,13 +115,13 @@ Scope can be one of the following:
 
 If there is no corresponding issue number, simply omit it.
 
-#### Submitting merge requests
-When creating a merge request, please provide the following information by
-filling in the [template](.gitlab/merge_request_templates/Merge%20request.md).
+#### Submitting pull requests
+When creating a pull request, please provide the following information by
+filling in the template.
 
-- What issue does this merge request correspond to?
-- What does this merge request implement?
-- What changes are made in this merge request?
+- What issue does this pull request correspond to?
+- What does this pull request implement?
+- What changes are made in this pull request?
 
 ## Styleguides
 
@@ -149,7 +146,7 @@ For the actual text in the commit message, here are some additional guidelines:
 - Use the present tense ("add feature" not "added feature").
 - Use the imperative mood ("move cursor to…" not "moves cursor to…").
 - Limit the first line to 72 characters or less.
-- Reference issues and merge requests liberally after the first line.
+- Reference issues and pull requests liberally after the first line.
 
 ### D styleguide
 All D code must adhere to [The D Style](https://dlang.org/dstyle.html). We
@@ -190,4 +187,3 @@ of all labels we currently use:
 | `duplicate` | Issues that are duplicates of other issues. |
 | `on hold` | Issues that we decided to not deal with right now, but might come back to later. |
 | `beginner` | Issues that are a great start for new beginning contributors. |
-| `help wanted` | Issues we would like new contributors to help us with. |
