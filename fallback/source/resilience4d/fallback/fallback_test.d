@@ -8,7 +8,7 @@ version (RESILIENCE4D_UNITTEST)
 }
 
 @("attempt with free function")
-unittest
+@safe pure unittest
 {
     // given
     int foo()
@@ -27,7 +27,7 @@ unittest
 }
 
 @("attempt with lambda")
-unittest
+@safe pure unittest
 {
     // given
     alias underTest = attempt!(() => 0);
@@ -41,7 +41,7 @@ unittest
 }
 
 @("attempt with lambda with parameter")
-unittest
+@safe pure unittest
 {
     // given
     alias underTest = attempt!(x => x);
@@ -55,7 +55,7 @@ unittest
 }
 
 @("failed attempt")
-unittest
+@safe pure unittest
 {
     // given
     alias underTest = attempt!(function int() { throw new Exception("foo"); });
@@ -69,7 +69,7 @@ unittest
 }
 
 @("attempt with closure")
-unittest
+@safe pure unittest
 {
     // given
     auto x = 42;
@@ -84,7 +84,7 @@ unittest
 }
 
 @("attempt with closure referencing a member function")
-unittest
+@safe pure unittest
 {
     // given
     struct SomeStruct
@@ -107,7 +107,7 @@ unittest
 }
 
 @("attempt with static member function")
-unittest
+@safe pure unittest
 {
     // given
     struct SomeStruct
@@ -126,4 +126,194 @@ unittest
     // then
     result.hasValue.should.be == true;
     result.value.should.be == 0;
+}
+
+@("recover with free function")
+@safe pure unittest
+{
+    // given
+    int foo(Exception)
+    {
+        return 42;
+    }
+
+    immutable val = unexpected!int(new Exception(""));
+
+    // when
+    immutable result = val.recover!foo;
+
+    // then
+    result.hasValue.should.be == true;
+    result.value.should.be == 42;
+}
+
+@("recover with specific exception")
+@safe pure unittest
+{
+    // given
+    static class MyException : Exception
+    {
+        this()
+        {
+            super("");
+        }
+    }
+
+    int foo(MyException)
+    {
+        return 42;
+    }
+
+    immutable val = unexpected!int(new MyException);
+
+    // when
+    immutable result = val.recover!foo;
+
+    // then
+    result.hasValue.should.be == true;
+    result.value.should.be == 42;
+}
+
+@("recover with more generic exception than thrown")
+@safe pure unittest
+{
+    // given
+    static class MyException : Exception
+    {
+        this()
+        {
+            super("");
+        }
+    }
+
+    int foo(Exception)
+    {
+        return 42;
+    }
+
+    immutable val = unexpected!int(new MyException);
+
+    // when
+    immutable result = val.recover!foo;
+
+    // then
+    result.hasValue.should.be == true;
+    result.value.should.be == 42;
+}
+
+@("recover with non matching exception")
+@safe pure unittest
+{
+    // given
+    static class MyException : Exception
+    {
+        this()
+        {
+            super("");
+        }
+    }
+
+    int foo(MyException)
+    {
+        return 42;
+    }
+
+    immutable val = unexpected!int(new Exception(""));
+
+    // when
+    immutable result = val.recover!foo;
+
+    // then
+    result.hasValue.should.be == false;
+}
+
+@("recover with template lambda")
+@safe pure unittest
+{
+    // given
+    static class MyException : Exception
+    {
+        this()
+        {
+            super("");
+        }
+    }
+
+    immutable val = unexpected!int(new MyException);
+
+    // when
+    immutable result = val.recover!(_ => 9001);
+
+    // then
+    result.hasValue.should.be == true;
+    result.value.should.be == 9001;
+}
+
+@("recover with function lambda")
+@safe pure unittest
+{
+    // given
+    static class MyException : Exception
+    {
+        this()
+        {
+            super("");
+        }
+    }
+
+    immutable val = unexpected!int(new MyException);
+
+    // when
+    immutable result = val.recover!((MyException _) => 9001);
+
+    // then
+    result.hasValue.should.be == true;
+    result.value.should.be == 9001;
+}
+
+@("multiple recovers")
+@safe pure unittest
+{
+    // given
+    static class MyException : Exception
+    {
+        this()
+        {
+            super("");
+        }
+    }
+
+    immutable val = unexpected!int(new Exception(""));
+
+    // when
+    immutable result = val.recover!((MyException _) => 9001)
+        .recover!((Exception _) => 42);
+
+    // then
+    result.hasValue.should.be == true;
+    result.value.should.be == 42;
+}
+
+@("recover with exception thrown")
+@safe pure unittest
+{
+    // given
+    static class MyException : Exception
+    {
+        this()
+        {
+            super("fooo");
+        }
+    }
+
+    immutable val = unexpected!int(new Exception(""));
+
+    // when
+    immutable result = val.recover!(function int(Exception _) {
+        throw new MyException;
+    });
+
+    // then
+    result.hasValue.should.be == false;
+    result.exception.msg.should.be == "fooo";
 }

@@ -1,6 +1,7 @@
 module resilience4d.fallback;
 
 public import expectations;
+import std.traits : isSomeFunction, Parameters, ReturnType;
 
 version (RESILIENCE4D_UNITTEST)
 {
@@ -23,7 +24,7 @@ template attempt(alias func)
 }
 
 ///
-unittest
+@safe pure unittest
 {
     // given
     alias attemptDivide = attempt!((x, y) {
@@ -41,61 +42,48 @@ unittest
     succesfulResult.value.should.be == 5;
     failedResult.hasValue.should.be == false;
     failedResult.exception.msg.should.be == "Division by zero";
-
 }
 
-private template isImplicitlyConvertableInSomeDirection(T, U)
-{
-    enum isImplicitlyConvertableInSomeDirection = is(T : U) || is(U : T);
-}
+private enum isTemplateCallableWith(alias func, U, V) = __traits(isTemplate, func)
+    && __traits(compiles, { U u = func(V.init); });
 
-private template isCallableWith(alias func, U, V)
-{
-    enum isCallableWith = __traits(compiles, { U u = func(V.init); });
-}
+private enum isInSameClassHierarchyAs(T, U) = is(T : U) || is(U : T);
 
-template recover(alias func)
+auto recover(alias func, T)(Expected!T self)
+        if (isTemplateCallableWith!(func, T, Exception) || (isSomeFunction!func
+            && is(ReturnType!func : T) && isInSameClassHierarchyAs!(Parameters!func, Exception)))
 {
-    import std.traits : isSomeFunction, Parameters, ReturnType;
-
-    auto recover(T)(Expected!T self)
-            if ((isSomeFunction!func && is(ReturnType!func : T)
-                && isImplicitlyConvertableInSomeDirection!(Exception, Parameters!func))
-                || isCallableWith!(func, T, Exception))
+    if (self.hasValue)
     {
-
-        if (!self.hasValue)
+        return self;
+    }
+    else
+    {
+        static if (isTemplateCallableWith!(func, T, Exception))
         {
-            static if (isSomeFunction!func)
+            return attempt!func(self.exception);
+        }
+        else
+        {
+            alias Param = Parameters!func[0];
+            auto castedException = cast(Param) self.exception;
+            if (castedException !is null)
             {
-                alias Param = Parameters!func[0];
-                static if (is(Exception : Param))
-                {
-                    return expected(func(self.exception));
-                }
-                else
-                {
-                    if (typeid(self.exception) == typeid(Param))
-                    {
-                        return expected(func(cast(Param) self.exception));
-                    }
-                }
+                return attempt!func(castedException);
             }
             else
             {
-                return expected(func(self.exception));
+                return self;
             }
         }
-
-        return self;
     }
 }
 
 ///
-unittest
+@safe pure unittest
 {
     // given
-    class MyException : Exception
+    static class MyException : Exception
     {
         this()
         {
@@ -103,7 +91,7 @@ unittest
         }
     }
 
-    class AnotherException : Exception
+    static class AnotherException : Exception
     {
         this()
         {
@@ -111,12 +99,14 @@ unittest
         }
     }
 
-    immutable val = unexpected!int(new AnotherException);
+    immutable val = unexpected!int(new MyException);
 
     // when
-    immutable result = val.recover!((MyException x) => 0)
-        .recover!((AnotherException x) => 1)
-        .recover!((Exception x) => 2);
+    immutable result = val.recover!(function int(MyException _) {
+        throw new AnotherException;
+    })
+        .recover!((AnotherException _) => 1)
+        .recover!((Exception _) => 2);
 
     // then
     result.hasValue.should.be == true;
