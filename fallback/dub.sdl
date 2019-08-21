@@ -1,0 +1,17 @@
+name "fallback"
+
+dependency "expectations" version="~>0.2.0"
+
+configuration "library" {
+    targetType "library"
+    excludedSourceFiles "*_test.d"
+}
+
+configuration "unittest" {
+    versions "RESILIENCE4D_UNITTEST"
+    targetType "executable"
+    targetName "fallback-test-unittest"
+    dependency "unit-threaded" version="~>0.7.53"
+    preBuildCommands "cd $PACKAGE_DIR; dub run unit-threaded -c gen_ut_main -- -f bin/ut.d"
+    mainSourceFile "bin/ut.d"
+}
