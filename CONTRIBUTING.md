@@ -32,7 +32,7 @@ report and reproduce the behavior.
 #### How to submit a (good) bug report
 Bugs are tracked in our [issue tracker](https://github.com/ghost91-/Resilience4d/issues).
 When creating a bug report,please provide the following information by filling
-in the [template](https://gitlab.com/ghost91-/resilience4d/issues/new?issuable_template=Bug%20report).
+in the [template](https://github.com/ghost91-/Resilience4d/issues/new?template=bug_report.md).
 
 Explain the problem and include additional details to help maintainers reproduce
 the problem:
@@ -80,7 +80,7 @@ that the enhancement is already available.
 
 Enhancement Suggestion are tracked in our [issue tracker](https://github.com/ghost91-/Resilience4d/issues).
 When creating an enhancement suggestion, please provide the following
-information by filling in the [template](https://gitlab.com/ghost91-/resilience4d/issues/new?issuable_template=Enhancement%20suggestion).
+information by filling in the [template](https://github.com/ghost91-/Resilience4d/issues/new?template=enhancement-suggestion.md).
 
 - **Use a clear and descriptive title** for the issue to identify the
   suggestion.
