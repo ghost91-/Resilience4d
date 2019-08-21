@@ -9,7 +9,7 @@ changes to this document in a merge request.
 ## Important resources
 - Documentation: [README.md](README.md) (we don’t have anything else at the
   moment)
-- Issue tracker: [Issues](https://gitlab.com/ghost91-/resilience4d/issues)
+- Issue tracker: [Issues](https://github.com/ghost91-/Resilience4d/issues)
 
 
 ## Building and testing
@@ -27,10 +27,10 @@ report and reproduce the behavior.
 #### Before submitting a bug report
 - Make sure you are using the latest version of Resilience4d.
 - Check the [README.md](README.md) which covers some common problems.
-- Check if the problem has already been reported in our [issue tracker](https://gitlab.com/ghost91-/resilience4d/issues).
+- Check if the problem has already been reported in our [issue tracker](https://github.com/ghost91-/Resilience4d/issues).
 
 #### How to submit a (good) bug report
-Bugs are tracked in our [issue tracker](https://gitlab.com/ghost91-/resilience4d/issues).
+Bugs are tracked in our [issue tracker](https://github.com/ghost91-/Resilience4d/issues).
 When creating a bug report,please provide the following information by filling
 in the [template](https://gitlab.com/ghost91-/resilience4d/issues/new?issuable_template=Bug%20report).
 
@@ -74,11 +74,11 @@ community understand your suggestions.
 #### Before submitting an enhancement suggestion
 - Make sure you are using the latest version of Resilience4d. You might discover
 that the enhancement is already available.
-- Check if the enhancement has already been suggested in our [issue tracker](https://gitlab.com/ghost91-/resilience4d/issues).
+- Check if the enhancement has already been suggested in our [issue tracker](https://github.com/ghost91-/Resilience4d/issues).
 
 #### How to submit a (good) enhancement suggestion
 
-Enhancement Suggestion are tracked in our [issue tracker](https://gitlab.com/ghost91-/resilience4d/issues).
+Enhancement Suggestion are tracked in our [issue tracker](https://github.com/ghost91-/Resilience4d/issues).
 When creating an enhancement suggestion, please provide the following
 information by filling in the [template](https://gitlab.com/ghost91-/resilience4d/issues/new?issuable_template=Enhancement%20suggestion).
 
@@ -191,9 +191,3 @@ of all labels we currently use:
 | `on hold` | Issues that we decided to not deal with right now, but might come back to later. |
 | `beginner` | Issues that are a great start for new beginning contributors. |
 | `help wanted` | Issues we would like new contributors to help us with. |
-
-### Project board
-
-We use a [project board](https://gitlab.com/ghost91-/resilience4d/boards/894356)
-to manage our current work. It is a great place to see what is currently being
-worked on and what is planned next.
